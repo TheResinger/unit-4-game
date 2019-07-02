@@ -1,28 +1,28 @@
 var charChosen = false;
+var chosenClass = [];
 var characters = [
     {
-        class : "dancer",
+        class : "Dancer",
         att : 20,
         hp : 20,
         src : "assets/img/bard.png",
         val : "dnc",
     },
     {
-        class : "bard",
+        class : "Bard",
         att : 25,
         hp : 15,
         src: "assets/img/bard.png",
         val : "brd",
     },
     {
-        class : "machinist",
+        class : "Machinist",
         att : 15,
         hp : 25,
         src : "assets/img/mch.png",
         val : "mch",
     },
 ];
-$( document ).ready(){
     if(charChosen !== true)
     {
         characters.forEach(function(character){
@@ -30,6 +30,7 @@ $( document ).ready(){
             var val = characters.map(a => a.val);
             var att = characters.map(a => a.att);
             var hp = characters.map(a => a.hp);
+            var character = characters.map(a => a.class);
             var imageCharacter = $("<img>");
             imageCharacter.addClass("character-image col-md-4");
             $("#characters").append(imageCharacter);
@@ -39,26 +40,43 @@ $( document ).ready(){
             $('img').each(function(index){
                 $(this).attr("src", source[index]);
             });
+            var charClass = $("<p>");
+            charClass.addClass("character-Class col-md-4 text-center");
+            $("#characterClass").append(charClass);
+            $("#characterClass").find('p').each(function(index){
+                $(this).text(character[index]);
+                console.log(this);
+                // console.log(charClass[index]);
+            });
             var charHP = $("<p>");
             charHP.addClass("character-HP col-md-4 text-center");
             $("#characterHP").append(charHP);
-            $('p').each(function(index){
+            $("#characterHP").find("p").each(function(index){
                 $(this).text("HP : " + hp[index]);
+                // $(this).text("HP : " + hp[index]);
+                // console.log(this);
             });
-            // var charAtt = $("<p>");
-            // charAtt.addClass("character-Att col-md-4 text-center");
-            // $("#characterAtt").append(charAtt);
-            // $('p').each(function(index){
-            //     $(this).text("Att : " + att[index]);
-            // });
+            var charAtt = $("<p>");
+            charAtt.addClass("character-Att col-md-4 text-center");
+            $("#characterAtt").append(charAtt);
+            $("#characterAtt").find("p").each(function(index){
+                $(this).text("Att : " + att[index]);
+                // console.log(this);
+            });
         });
         $('.character-image').on("click", function(){
+            // console.log($(this).val());
+            console.log($(this).attr("value"));
+            chosenClass.push($(this).attr("value"));
             charChosen = true;
             console.log(charChosen);
+            $(".characters").remove();
+            $(".jumbotron").remove();
+            console.log(chosenClass);
+
         });
     }
     else
     {
 
     }
-)};
