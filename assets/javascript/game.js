@@ -5,14 +5,14 @@ var characters = [
         class : "Dancer",
         att : 20,
         hp : 20,
-        src : "assets/img/bard.png",
+        src : "assets/img/dnc.png",
         val : "dnc",
     },
     {
         class : "Bard",
         att : 25,
         hp : 15,
-        src: "assets/img/bard.png",
+        src: "assets/img/brd.png",
         val : "brd",
     },
     {
@@ -45,34 +45,26 @@ var characters = [
             $("#characterClass").append(charClass);
             $("#characterClass").find('p').each(function(index){
                 $(this).text(character[index]);
-                console.log(this);
-                // console.log(charClass[index]);
             });
             var charHP = $("<p>");
             charHP.addClass("character-HP col-md-4 text-center");
             $("#characterHP").append(charHP);
             $("#characterHP").find("p").each(function(index){
                 $(this).text("HP : " + hp[index]);
-                // $(this).text("HP : " + hp[index]);
-                // console.log(this);
             });
             var charAtt = $("<p>");
             charAtt.addClass("character-Att col-md-4 text-center");
             $("#characterAtt").append(charAtt);
             $("#characterAtt").find("p").each(function(index){
                 $(this).text("Att : " + att[index]);
-                // console.log(this);
             });
         });
         $('.character-image').on("click", function(){
-            // console.log($(this).val());
             console.log($(this).attr("value"));
             chosenClass.push($(this).attr("value"));
             charChosen = true;
-            console.log(charChosen);
             $(".characters").remove();
             $(".jumbotron").remove();
-            console.log(chosenClass);
 
         });
     }
