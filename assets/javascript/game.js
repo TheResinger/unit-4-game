@@ -40,30 +40,11 @@ var enemies = [
     }
 
 ];
-var charSheetDiv = $("<div>")
-var charDiv = $("<div>");
-var charClassDiv = $("<div>");
-var charHPDiv = $("<div>");
-var charAttDiv = $("<div>");
-
-charSheetDiv.attr('id', "charSheet");
-$(".container").append(charSheetDiv);
-
-charDiv.attr('id', "characters");
-charDiv.addClass("row");
-$("#charSheet").append(charDiv);
-
-charClassDiv.attr('id', "characterClass");
-charClassDiv.addClass("row");
-$("#charSheet").append(charClassDiv);
-
-charHPDiv.attr('id', "characterHP");
-charHPDiv.addClass("row");
-$("#charSheet").append(charHPDiv);
-
-charAttDiv.attr('id', "characterAtt");
-charAttDiv.addClass("row");
-$("#charSheet").append(charAttDiv);
+$(".container").append($("<div>", {"id" : "charSheet"}));
+$("#charSheet").append($("<div>", {"id" : "characters", "class" : "row"}));
+$("#charSheet").append($("<div>", {"id" : "characterClass", "class" : "row"}));
+$("#charSheet").append($("<div>", {"id" : "characterHP", "class" : "row"}));
+$("#charSheet").append($("<div>", {"id" : "characterAtt", "class" : "row"}));
 if(charChosen === false)
 {
     characters.forEach(function(character){
@@ -74,30 +55,22 @@ if(charChosen === false)
         var character = characters.map(a => a.class);
         var imageCharacter = $("<img>");
         imageCharacter.addClass("character-image col-md-4");
-        $("#characters").append(imageCharacter);
+        $("#characters").append($("<img>", {"class" : "character-image col-md-4"}));
         $('#characters').find("img").each(function(index){
             $(this).attr("value", val[index]);
         });
         $("#characters").find("img").each(function(index){
             $(this).attr("src", source[index]);
         });
-        var charClass = $("<p>");
-        charClass.addClass("character-val col-md-4 text-center");
-        $("#characterClass").append(charClass);
+        $("#characterClass").append($("<p>", {"class" : "character-val col-md-4 text-center"}));
         $("#characterClass").find('p').each(function(index){
             $(this).text(character[index]);
-            console.log(character[index]);
-            console.log(this);
         });
-        var charHP = $("<p>");
-        charHP.addClass("character-HP col-md-4 text-center");
-        $("#characterHP").append(charHP);
+        $("#characterHP").append($("<p>", {"class" : "character-HP col-md-4 text-center"}));
         $("#characterHP").find("p").each(function(index){
             $(this).text("HP : " + hp[index]);
         });
-        var charAtt = $("<p>");
-        charAtt.addClass("character-Att col-md-4 text-center");
-        $("#characterAtt").append(charAtt);
+        $("#characterAtt").append($("<p>", {"class" : "character-Att col-md-4 text-center"}));
         $("#characterAtt").find("p").each(function(index){
             $(this).text("Att : " + att[index]);
         });
@@ -129,12 +102,20 @@ $('.character-image').on("click", function(){
 
 //Creates a new div to hold the players hp.
     $("#gameSpace").append($('<div>',{ "class" : "row", "id" : "playerInfo"}));
-    $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
+    $("#playerInfo").append($('<div>',{ "class" : "col-md-4 blank", }));
     $("#playerInfo").append($("<p>", { "id" : "playerHpElement", "class" : "text-center col-md-4", "text" : "HP : " + returnHP}));
-    $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
+    $("#playerInfo").append($('<div>',{ "class" : "col-md-4 blank"}));
 
 // Create a blank div to be used for the combat log
     $("#gameSpace").append($("<div>", { "class" : "row", "id" : "combatLog"}));
+// Assign something to combatLog div to display it
+    $("#combatLog").append($("<p>", { "class" : "col-md-12 text-center", "id" : "playerText", "text" : "Please Select"}));
+    $("#combatLog").append($("<p>", { "class" : "col-md-12 text-center", "id" : "enemyText", "text" : "an Enemy to Begin"}));
+
+// Create div that starts blank for the mobs HP to be displayed
+    $("#gameSpace").append($("<div>", { "class" : "row", "id" : "enemyHealth"}));
+
+
     // enemies.forEach(function(enemy){
     //     var source = enemies.map(a => a.src);
     //     var val = enemies.map(a => a.val);
