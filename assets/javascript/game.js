@@ -12,7 +12,7 @@ var characters = [
     },
     {
         class : "Bard",
-        att : 25,
+        att : 100,
         hp : 15,
         src: "assets/img/brd.png",
         val : "brd",
@@ -28,21 +28,21 @@ var characters = [
 var enemies = [
     {
         name : "Goblin",
-        hp : 10,
+        hp : 1000,
         counter : 10,
         src : "assets/img/goblin.png",
         val : "gbln",
     },
     {
         name : "Harpy",
-        hp : 50,
+        hp : 3500,
         counter : 20,
         src : "assets/img/harpy.png",
         val : "hrpy",
     },
     {
         name : "Bahamut",
-        hp : 10000,
+        hp : 5500,
         counter : 200,
         src : "assets/img/bahamut.png",
         val : "bhmt",
@@ -172,7 +172,13 @@ $(document).one("click", ".enemy", function(){
         $("#gameSpace").append($("<div>", {"class" : "row", "id" : "selectedEnemyContainer"}))
         $("#selectedEnemyContainer").append($('<div>',{ "class" : "col-md-4"}));  //Blank Div for padding
         $("#selectedEnemyContainer").append($('<img>',{ "class" : "col-md-4","id" : "target", "src" : returnEnmSrc})); //Characcter image
-        $("#selectedEnemyContainer").append($('<div>',{ "class" : "col-md-4"}))
+        $("#selectedEnemyContainer").append($('<div>',{ "class" : "col-md-4"}));
+        var fds = 100;
+        for(var i = 0; i < 100; i++)
+        {
+            fds += 100;
+            console.log(fds);
+        }
     }   
 });
  
