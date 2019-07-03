@@ -37,9 +37,16 @@ var enemies = [
         counter : 20,
         src : "assets/img/harpy.png",
         val : "hrpy",
-    }
-
+    },
+    {
+        name : "Bahamut",
+        hp : 100,
+        counter : 200,
+        src : "assets/img/bahamut.png",
+        val : "bhmt",
+    },
 ];
+
 $(".container").append($("<div>", {"id" : "charSheet"}));
 $("#charSheet").append($("<div>", {"id" : "characters", "class" : "row"}));
 $("#charSheet").append($("<div>", {"id" : "characterClass", "class" : "row"}));
@@ -112,30 +119,34 @@ $('.character-image').on("click", function(){
     $("#combatLog").append($("<p>", { "class" : "col-md-12 text-center", "id" : "playerText", "text" : "Please Select"}));
     $("#combatLog").append($("<p>", { "class" : "col-md-12 text-center", "id" : "enemyText", "text" : "an Enemy to Begin"}));
 
+// Create Div for Enemy Names
+    $("#gameSpace").append($("<div>", { "class" : "row", "id" : "enemyNames"}));
+// Create Div for enemy images
+    $("#gameSpace").append($("<div>", { "class" : "row", "id" : "enemiesContainer"}));
 // Create div that starts blank for the mobs HP to be displayed
     $("#gameSpace").append($("<div>", { "class" : "row", "id" : "enemyHealth"}));
-
-
-    // enemies.forEach(function(enemy){
-    //     var source = enemies.map(a => a.src);
-    //     var val = enemies.map(a => a.val);
-    //     var att = enemies.map(a => a.att);
-    //     var hp = enemies.map(a => a.hp);
-    //     var enemy = enemies.map(a => a.class);
-    //     var imageEnemy = $("<img>");
-    //     imageEnemy.addClass("enemy-image col-md-4");
-    //     $("#gameSpace").append(imageEnemy);
-    //     $("#gameSpace").find("img").each(function(index){
-    //         $(this).attr("value", val[index]);
-    //     });
-    //     $("#gameSpace").find("img").each(function(index){
-    //         $(this).attr("src", source[index]);
-    //     });
-    //     var enemyName = $("<p>");
-    //     enemyName.addClass("enemy-val col-md-4 text-center");
-    //     $("#gameSpace").append(enemyName);
-    //     $("#gameSpace").find('p').each(function(index){
-    //         $(this).text(enemy[index]);
-    //     });
-    // });
+    
+    enemies.forEach(function(enemy){
+        var enemySrc = enemies.map(a => a.src);
+        var enemyVal = enemies.map(a => a.val);
+        var enemyAtt = enemies.map(a => a.att);
+        var enemyHp = enemies.map(a => a.hp);
+        var enemy = enemies.map(a => a.name);
+        $("#enemiesContainer").append($('<img>',{ "class" : "col-md-4","id" : "enemy", "src" : enemySrc}));
+        $("#enemiesContainer").find("img").each(function(index){
+            $(this).attr("value", enemyVal[index]);
+        });
+        $("#enemiesContainer").find("img").each(function(index){
+            $(this).attr("src", enemySrc[index]);
+        });
+        $("#enemyHealth").append($('<p>', { "class" : "text-center col-md-4"}));
+        $("#enemyHealth").find("p").each(function(index){
+            $(this).text("HP : " + enemyHp[index]);
+        });
+        $("#enemyNames").append($('<p>', { "class" : "text-center col-md-4"}));
+        $("#enemyNames").find("p").each(function(index){
+            $(this).text(enemy[index]);
+        });
+    });
+    // $('')
 })
