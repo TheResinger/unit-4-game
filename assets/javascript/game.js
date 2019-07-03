@@ -23,6 +23,23 @@ var characters = [
         val : "mch",
     },
 ];
+var enemies = [
+    {
+        name : "Goblin",
+        hp : 20,
+        counter : 10,
+        src : "assets/img/goblin.png",
+        val : "gbln",
+    },
+    {
+        name : "Harpy",
+        hp : 10,
+        counter : 20,
+        src : "assets/img/harpy.png",
+        val : "hrpy",
+    }
+
+];
 var charSheetDiv = $("<div>")
 var charDiv = $("<div>");
 var charClassDiv = $("<div>");
@@ -58,10 +75,10 @@ if(charChosen === false)
         var imageCharacter = $("<img>");
         imageCharacter.addClass("character-image col-md-4");
         $("#characters").append(imageCharacter);
-        $('img').each(function(index){
+        $('#characters').find("img").each(function(index){
             $(this).attr("value", val[index]);
         });
-        $('img').each(function(index){
+        $("#characters").find("img").each(function(index){
             $(this).attr("src", source[index]);
         });
         var charClass = $("<p>");
@@ -94,27 +111,54 @@ if(charChosen === false)
         console.log(charChosen);
 
     });
-}
+};
 $('.character-image').on("click", function(){
     var gameSpaceDiv = $("<div>");
     gameSpaceDiv.attr('id', "gameSpace");
+    // gameSpaceDiv.addClass("row");
     $(".container").append(gameSpaceDiv);
-    console.log(chosenClass);
-    console.log(characters);
-
-    const findVal = function(characters, value)
-    {
-        const valReturned = characters.find(function(val, index){
-            return val.value === value;
-        })
-        return valReturned;
-    }
-    var print = findVal(characters, "dnc");
-    console.log(print)
-    
-        var imageCharacter = $("<img>");
-        imageCharacter.addClass("character-image col-md-4");
-        imageCharacter.attr("src", "assets/img/dnc.png");
-        // $('img').attr("src", "assets/img/dnc.png");
-        $("#gameSpace").append(imageCharacter);
-});
+    var playerDiv = $("<div>");
+    playerDiv.attr('id', "playerDiv");
+    playerDiv.addClass("row");
+    $("#gameSpace").append(playerDiv);
+    var imageCharacter = $("<img>");
+    imageCharacter.addClass("col-md-4");
+    imageCharacter.attr("id", "player");
+    var returnSrc = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.src);
+    var returnHP = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.hp);
+    // var returnAtt = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.att);
+    imageCharacter.attr("src", returnSrc);
+    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"}));
+    $("#playerDiv").append(imageCharacter);
+    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"}));
+    $("#gameSpace").append($('<div>',{ "class" : "row", "id" : "playerInfo"}));
+    var playerHpOnScreen = $("<p>");
+    playerHpOnScreen.attr("id", "playerHpElement");
+    playerHpOnScreen.addClass("text-center col-md-4");
+    playerHpOnScreen.text("HP : " + returnHP);
+    $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
+    $("#playerInfo").append(playerHpOnScreen);
+    $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
+    // enemies.forEach(function(enemy){
+    //     var source = enemies.map(a => a.src);
+    //     var val = enemies.map(a => a.val);
+    //     var att = enemies.map(a => a.att);
+    //     var hp = enemies.map(a => a.hp);
+    //     var enemy = enemies.map(a => a.class);
+    //     var imageEnemy = $("<img>");
+    //     imageEnemy.addClass("enemy-image col-md-4");
+    //     $("#gameSpace").append(imageEnemy);
+    //     $("#gameSpace").find("img").each(function(index){
+    //         $(this).attr("value", val[index]);
+    //     });
+    //     $("#gameSpace").find("img").each(function(index){
+    //         $(this).attr("src", source[index]);
+    //     });
+    //     var enemyName = $("<p>");
+    //     enemyName.addClass("enemy-val col-md-4 text-center");
+    //     $("#gameSpace").append(enemyName);
+    //     $("#gameSpace").find('p').each(function(index){
+    //         $(this).text(enemy[index]);
+    //     });
+    // });
+})
