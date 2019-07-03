@@ -5,27 +5,25 @@ var chosenEnemy = [];
 var damageStore = [];
 var damageCalc = 0;
 var playerHP = 1;
+
 var characters = [
     {
         class : "Dancer",
-        minAtt : 90,
-        maxAtt : 110,
+        att : 90,
         hp : 20,
         src : "assets/img/dnc.png",
         val : "dnc",
     },
     {
         class : "Bard",
-        minAtt : 90,
-        maxAtt : 110,
+        att : 100,
         hp : 15,
         src: "assets/img/brd.png",
         val : "brd",
     },
     {
         class : "Machinist",
-        minAtt : 90,
-        maxAtt : 110,
+        att : 80,
         hp : 25,
         src : "assets/img/mch.png",
         val : "mch",
@@ -63,8 +61,7 @@ $("#charSheet").append($("<div>", {"id" : "characterAtt", "class" : "row"}));
 characters.forEach(function(){
     var charSource = characters.map(a => a.src);
     var charVal = characters.map(a => a.val);
-    var charMinAtt = characters.map(a => a.minAtt);
-    var charMaxAtt = characters.map(a => a.maxAtt);
+    var charAtt = characters.map(a => a.att);
     var charHp = characters.map(a => a.hp);
     var charClass = characters.map(a => a.class);
     $("#characters").append($("<img>", {"class" : "character-image col-md-4"}));
@@ -84,7 +81,7 @@ characters.forEach(function(){
     });
     $("#characterAtt").append($("<p>", {"class" : "character-Att col-md-4 text-center"}));
     $("#characterAtt").find("p").each(function(index){
-        $(this).text("Attack : " + charMinAtt[index] + " - " + charMaxAtt[index]);
+        $(this).text("Attack : " + charAtt[index]);
     });
 });
 
@@ -182,29 +179,30 @@ if(playerHP >= 0)
             $("#selectedEnemyContainer").append($('<div>',{ "class" : "col-md-4"}));  //Blank Div for padding
             $("#selectedEnemyContainer").append($('<img>',{ "class" : "col-md-4","id" : "target", "src" : returnEnmSrc})); //Characcter image
             $("#selectedEnemyContainer").append($('<div>',{ "class" : "col-md-4"}));
-
-            // console.log(returnEnmHP);
-            
         }
-        
-        if( returnEnmHP >= 0)
-        {
-            $(document).on("click", "#target", function(){
-                var returnMinAtt = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.minAtt);
-                var returnMaxAtt = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.maxAtt);
-                console.log(returnEnmHP);
-                var playerRandDamage = Math.floor(Math.random() * (parseInt(returnMaxAtt) - parseInt(returnMinAtt)) + parseInt(returnMinAtt));
-                damageStore.push(playerRandDamage);
-                damageCalc = damageCalc + playerRandDamage;
-                $("#playerText").text("You Deal " + damageCalc + " damage to " + chosenEnemy);
+        var enmRemainHealth = parseInt(returnEnmHP);
+        $(document).on("click", "#target", function(){
+           
+                var returnAtt = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.att); // Pulls the value from the array for the damage
+                var damage = parseInt(returnAtt); // Asigns a new variable that has that damage value stored to it
+               
+                damageCalc = damageCalc + damage;
+                enmRemainHealth = enmRemainHealth - damageCalc;
                 
-                $("#enemyText").text("test");
-            });
-        }
-        else
-        {
-            console.log("thing is dead")
-        }
+                console.log(damageCalc)
+                if( enmRemainHealth > 0)
+                {
+                    console.log(damageCalc)
+                    console.log(enmRemainHealth)
+                    $("#playerText").text("You Deal " + parseInt(damageCalc) + " damage to " + chosenEnemy);
+                    $("#targetHpElement").text("HP : " + enmRemainHealth);
+                    $("#enemyText").text("test");
+                }
+                else
+                {
+                    $("#targetHpElement").text("HP : 0");
+                }
+        });    
     });
 }
 else
