@@ -1,5 +1,5 @@
 #charSheet {
-    max-width: 400px;
+    max-width: 960px;
     margin: 0 auto;
     /* border: 1px solid #000; */
 }
@@ -10,7 +10,7 @@
 }
 
 .container {
-    max-width: 960px;
+    /* max-width: 960px; */
     /* border: 1px solid #000; */
 }
 /* #playerDiv {
@@ -23,6 +23,18 @@
     border-right: 2px solid #000;
     border-bottom: 2px solid #000;
 } */
+.enemy{
+    height: 150px;
+    width: 200px;
+}
+#player{
+    height: 150px;
+    width: 200px;
+}
+#target{
+    height: 150px;
+    width: 200px;
+}
 #combatLog {
     border: 2px solid #000;
 }
@@ -37,6 +49,5 @@
     border: 2px solid #000;
 }
 .character-image {
-    height: 100px;
-    width: 100px;
+    height: 200px;
 }
