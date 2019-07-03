@@ -113,32 +113,28 @@ if(charChosen === false)
     });
 };
 $('.character-image').on("click", function(){
-    var gameSpaceDiv = $("<div>");
-    gameSpaceDiv.attr('id', "gameSpace");
-    // gameSpaceDiv.addClass("row");
-    $(".container").append(gameSpaceDiv);
-    var playerDiv = $("<div>");
-    playerDiv.attr('id', "playerDiv");
-    playerDiv.addClass("row");
-    $("#gameSpace").append(playerDiv);
-    var imageCharacter = $("<img>");
-    imageCharacter.addClass("col-md-4");
-    imageCharacter.attr("id", "player");
+   
+//    Generate Game Space Div to nest everything in
+    $(".container").append($('<div>',{ "id" : "gameSpace"}));
+
+//Create Div for chosen player sprite to reside 
+    $("#gameSpace").append($('<div>',{ "class" : "row", "id" : "playerDiv"}));
+
+//Grabs the chosen classes image source, and hp and assigns it into a div sorted with bootstrap grid
     var returnSrc = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.src);
     var returnHP = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.hp);
-    // var returnAtt = characters.filter(obj => obj.val == chosenClass ).map(obj => obj.att);
-    imageCharacter.attr("src", returnSrc);
-    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"}));
-    $("#playerDiv").append(imageCharacter);
-    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"}));
+    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"}));  //Blank Div for padding
+    $("#playerDiv").append($('<img>',{ "class" : "col-md-4","id" : "player", "src" : returnSrc})); //Characcter image
+    $("#playerDiv").append($('<div>',{ "class" : "col-md-4"})); //Blank Div for padding
+
+//Creates a new div to hold the players hp.
     $("#gameSpace").append($('<div>',{ "class" : "row", "id" : "playerInfo"}));
-    var playerHpOnScreen = $("<p>");
-    playerHpOnScreen.attr("id", "playerHpElement");
-    playerHpOnScreen.addClass("text-center col-md-4");
-    playerHpOnScreen.text("HP : " + returnHP);
     $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
-    $("#playerInfo").append(playerHpOnScreen);
+    $("#playerInfo").append($("<p>", { "id" : "playerHpElement", "class" : "text-center col-md-4", "text" : "HP : " + returnHP}));
     $("#playerInfo").append($('<div>',{ "class" : "col-md-4"}));
+
+// Create a blank div to be used for the combat log
+    $("#gameSpace").append($("<div>", { "class" : "row", "id" : "combatLog"}));
     // enemies.forEach(function(enemy){
     //     var source = enemies.map(a => a.src);
     //     var val = enemies.map(a => a.val);
