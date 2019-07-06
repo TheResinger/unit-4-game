@@ -1,0 +1,27 @@
+body{
+    background: url(../img/background.png);
+}
+#title {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 1px solid #000;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+.crystal {
+    height: 100px;
+}
+#crystals
+{
+    max-width: 600px;
+    margin: 0 auto;
+}
+#a{
+    max-width: 600px;
+    margin: 0 auto;
+}
+.col-md-6 
+{
+    border: 1px solid black;
+}
