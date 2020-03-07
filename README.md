@@ -21,11 +21,6 @@ SSH:
 $ git clone git@github.com:TheResinger/unit-4-game.git
 ```
 
-Next, cd into the repository and run the command
-```
-npm install
-```
-
 ### Built With
 
 * [jQuery](https://jquery.com/) - Javascript Libray
