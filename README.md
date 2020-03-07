@@ -1,24 +1,5 @@
 # Crystal Collector
 
-## TODO
-
-
-
-## Technologies Used
-
-1. HTML
-2. CSS
-3. JavaScript
-4. jQuery
-
-
-## Stages of the game
-
-
-
-
-# Crystal Collector
-
 ### Overview
 
 A small web game application.
@@ -47,7 +28,6 @@ npm install
 
 ### Built With
 
-* [Bootstrap](https://getbootstrap.com/) - CSS Template
 * [jQuery](https://jquery.com/) - Javascript Libray
 
 ### Future Development
